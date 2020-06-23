@@ -9,3 +9,36 @@
   <script src="./js/bundle.js"></script>
 </head>
 <body>
+    <div id="app">
+        <header>
+            <h1>Countries</h1>
+            <h2>Total Population: {{totalPopulation}}</h2>
+        </header>
+
+        <form v-on:submit.prevent="searchCountry(searchInput)">  
+            <input placeholder="Country Name" type="text" v-model="searchInput" />
+            <input type="submit" value="Search">
+        </form>
+
+        <section id="country-info">
+            <div class="country-info" v-if="country.population != 0">
+                <h2>{{country.name}}</h2>
+                <p>Capital: {{country.capital}}</p>
+                <p>Population: {{country.population}}</p>
+                <p>Borders: {{country.borders}}</p>
+                <p>Short Name: {{country.cioc}}</p>
+                <img :src="country.flag" alt="Country Flag"></img>
+
+                <form v-on:submit.prevent="addToFavouriteCountries">
+                    <input type="submit" value="Add To Fav."/>
+                </form>
+            </div>
+        </section>
+        <div>
+            <ul v-for="country in favouriteCountries">
+                <li>{{country.name}}</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
